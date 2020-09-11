@@ -1,0 +1,43 @@
+Spring Boot
+
+Spring Core (AOP, IoC, DI, CCC) -> Spring MVC + Spring REST(lots of configuration!!!! Not Easy!) -> Spring Boot! (auto configuration) -> Spring Cloud (Microservices!!!!)
+
+for what purpose mainly we use spring boot? So in springboot we have all features of spring core and spring mvc included?
+
+is it possible to migrate from spring mvc to spring boot  if the app is on spring mvc?
+
+java core to spring core
+
+REST end points!
+
+{
+	id: 1,
+	name: "prafful",
+	status: true,
+	score: 22.22
+}
+
+[
+
+{
+	id: 1,
+	name: "prafful",
+	status: true,
+	score: 22.22
+},
+
+{
+	id: 2,
+	name: "sad",
+	status: true,
+	score: 22.22
+}
+,
+{
+	id: 3,
+	name: "dfg",
+	status: true,
+	score: 22.22
+}
+]
+
