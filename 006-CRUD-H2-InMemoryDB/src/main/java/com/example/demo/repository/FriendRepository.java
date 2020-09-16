@@ -1,10 +1,9 @@
 package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
-import com.example.demo.pojo.Friend;
+import com.example.demo.entity.FriendEntity;
 
-public interface FriendRepository extends JpaRepository<Friend	, Integer> {
+public interface FriendRepository extends JpaRepository<FriendEntity, Integer> {
 
 }
