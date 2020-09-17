@@ -3,6 +3,7 @@ package com.example.demo.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,6 +56,21 @@ public class HelloRestController {
 	//@RequestMapping(value = "/friends/update/{myid}", method = RequestMethod.PUT)
 	public List<Friend> updateFriendById(@RequestBody Friend f, @PathVariable("myid") int id) {
 		return friendService.updateFriendById(f, id);
+	}
+	
+	@GetMapping("/friends/findbyname/{name}")
+	public List<Friend> getFriendByName(@PathVariable String name){
+		return friendService.getFriendByName(name);
+	}
+	
+	@GetMapping("/friends/findbylocation/{location}")
+	public List<Friend> getFriendByLocation(@PathVariable String location){
+		return friendService.getFriendByLocation(location);
+	}
+	
+	@GetMapping("/friends/namecontain/{name}")
+	public List<Friend> getFriendByNameContaining(@PathVariable String name){
+		return friendService.getFriendByNameContaining(name);
 	}
 	
 	

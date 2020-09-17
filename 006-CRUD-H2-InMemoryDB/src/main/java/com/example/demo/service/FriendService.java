@@ -39,4 +39,19 @@ public class FriendService {
 		return friendDao.updateFriendById(f, id);
 	}
 
+	public List<Friend> getFriendByName(String name) {
+		// TODO Auto-generated method stub
+		return friendDao.getFriendByName(name);
+	}
+
+	public List<Friend> getFriendByLocation(String location) {
+		// TODO Auto-generated method stub
+		return friendDao.getFriendByLocation(location);
+	}
+
+	public List<Friend> getFriendByNameContaining(String name) {
+		// TODO Auto-generated method stub
+		return friendDao.getFriendByNameContaining(name);
+	}
+
 }
