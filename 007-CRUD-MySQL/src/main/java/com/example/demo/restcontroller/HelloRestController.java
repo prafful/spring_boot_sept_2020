@@ -3,6 +3,7 @@ package com.example.demo.restcontroller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,31 +32,16 @@ public class HelloRestController {
 		return "Hello from Spring Boot DevTools!!!!";
 	}
 	
+	// all get requests
+	
 	@RequestMapping("/friends/all")
 	public List<Friend> getAllFriends() {
 		return friendService.getAllFriends();
 	}
 	
-	@RequestMapping(value = "/friends/add", method = RequestMethod.POST)
-	public List<Friend> addFriend(@RequestBody Friend f) {
-		return friendService.addFriend(f);
-	}
-	
 	@RequestMapping(value = "/friends/get/{myid}")
 	public Friend getFriendById(@PathVariable("myid") int id) {
 		return friendService.getFriendById(id);
-	}
-	
-	@RequestMapping(value = "/friends/del/{myid}", method = RequestMethod.DELETE)
-	public List<Friend> deleteFriendById(@PathVariable("myid") int id) {
-		return friendService.deleteFriendById(id);
-		
-	}
-	
-	@PutMapping("/friends/update/{myid}")
-	//@RequestMapping(value = "/friends/update/{myid}", method = RequestMethod.PUT)
-	public List<Friend> updateFriendById(@RequestBody Friend f, @PathVariable("myid") int id) {
-		return friendService.updateFriendById(f, id);
 	}
 	
 	@GetMapping("/friends/findbyname/{name}")
@@ -72,6 +58,32 @@ public class HelloRestController {
 	public List<Friend> getFriendByNameContaining(@PathVariable String name){
 		return friendService.getFriendByNameContaining(name);
 	}
+	
+	//post request
+	
+	@RequestMapping(value = "/friends/add", method = RequestMethod.POST)
+	public List<Friend> addFriend(@RequestBody Friend f) {
+		return friendService.addFriend(f);
+	}
+	
+	
+	//delete request
+	
+	@DeleteMapping("/friends/del/{myid}")
+	public List<Friend> deleteFriendById(@PathVariable("myid") int id) {
+		return friendService.deleteFriendById(id);
+		
+	}
+	
+	//update request
+	
+	@PutMapping("/friends/update/{myid}")
+	//@RequestMapping(value = "/friends/update/{myid}", method = RequestMethod.PUT)
+	public List<Friend> updateFriendById(@RequestBody Friend f, @PathVariable("myid") int id) {
+		return friendService.updateFriendById(f, id);
+	}
+	
+	
 	
 	
 }
