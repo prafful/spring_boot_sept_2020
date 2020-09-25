@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,12 +16,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	
+	@Autowired
 	private UserPrincipalDetailService userPrincipalDetailService;
 
-	public SecurityConfig(UserPrincipalDetailService userPrincipalDetailService) {
-		// TODO Auto-generated constructor stub
-		this.userPrincipalDetailService = userPrincipalDetailService;
-	}
+	/*
+	 * public SecurityConfig(UserPrincipalDetailService userPrincipalDetailService)
+	 * { // TODO Auto-generated constructor stub this.userPrincipalDetailService =
+	 * userPrincipalDetailService; }
+	 */
 	
 	//authentication
 	@Override
@@ -30,8 +33,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 				/*
 				 * .inMemoryAuthentication()
 				 * .withUser("visitor").password("{noop}visitor1234").roles("VISITOR") .and()
-				 * .withUser("manager").password("{noop}manager1234").roles("VISITOR",
-				 * "MANAGER") .and()
+				 * .withUser("manager").password("{noop}manager1234").roles("VISITOR", "MANAGER") 
+				 * .and()
 				 .withUser("admin").password("{noop}admin1234").roles("VISITOR", "MANAGER", "ADMIN");
 		*/
 		
@@ -41,10 +44,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers(HttpMethod.DELETE, "/friends/**").hasAnyRole("ADMIN")
-			.antMatchers(HttpMethod.PUT, "/frends/**").hasAnyRole("MANAGER", "ADMIN")
-			.antMatchers(HttpMethod.POST, "/friends/**").hasAnyRole("MANAGER", "ADMIN")
-			.antMatchers(HttpMethod.GET, "/friends/**").hasAnyRole("VISITOR", "MANAGER", "ADMIN")
+			.antMatchers("/get/**").hasAnyRole("VISITOR", "MANAGER", "ADMIN")
+			.antMatchers("/update/**").hasAnyRole("MANAGER", "ADMIN")
+			.antMatchers("/add").hasAnyRole("MANAGER", "ADMIN")
+			.antMatchers("/delete/**").hasAnyRole("ADMIN")
+			.antMatchers("/welcome").permitAll()
 			.and()
 			.httpBasic()
 			.and()
@@ -61,7 +65,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-		daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailService);
+		daoAuthenticationProvider.setUserDetailsService(userPrincipalDetailService);
 		
 		return daoAuthenticationProvider;
 		

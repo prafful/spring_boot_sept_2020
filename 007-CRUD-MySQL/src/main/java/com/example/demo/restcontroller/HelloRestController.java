@@ -34,34 +34,34 @@ public class HelloRestController {
 	
 	// all get requests
 	
-	@RequestMapping("/friends/all")
+	@RequestMapping("/get")
 	public List<Friend> getAllFriends() {
 		return friendService.getAllFriends();
 	}
 	
-	@RequestMapping(value = "/friends/get/{myid}")
+	@RequestMapping(value = "/get/{myid}")
 	public Friend getFriendById(@PathVariable("myid") int id) {
 		return friendService.getFriendById(id);
 	}
 	
-	@GetMapping("/friends/findbyname/{name}")
+	@GetMapping("/get/findbyname/{name}")
 	public List<Friend> getFriendByName(@PathVariable String name){
 		return friendService.getFriendByName(name);
 	}
 	
-	@GetMapping("/friends/findbylocation/{location}")
+	@GetMapping("/get/findbylocation/{location}")
 	public List<Friend> getFriendByLocation(@PathVariable String location){
 		return friendService.getFriendByLocation(location);
 	}
 	
-	@GetMapping("/friends/namecontain/{name}")
+	@GetMapping("/get/namecontain/{name}")
 	public List<Friend> getFriendByNameContaining(@PathVariable String name){
 		return friendService.getFriendByNameContaining(name);
 	}
 	
 	//post request
 	
-	@RequestMapping(value = "/friends/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public List<Friend> addFriend(@RequestBody Friend f) {
 		return friendService.addFriend(f);
 	}
@@ -69,7 +69,7 @@ public class HelloRestController {
 	
 	//delete request
 	
-	@DeleteMapping("/friends/del/{myid}")
+	@DeleteMapping("/del/{myid}")
 	public List<Friend> deleteFriendById(@PathVariable("myid") int id) {
 		return friendService.deleteFriendById(id);
 		
@@ -77,7 +77,7 @@ public class HelloRestController {
 	
 	//update request
 	
-	@PutMapping("/friends/update/{myid}")
+	@PutMapping("/update/{myid}")
 	//@RequestMapping(value = "/friends/update/{myid}", method = RequestMethod.PUT)
 	public List<Friend> updateFriendById(@RequestBody Friend f, @PathVariable("myid") int id) {
 		return friendService.updateFriendById(f, id);

@@ -1,0 +1,9 @@
+URL: https://s3.amazonaws.com/daveceddia.com/Pure+React+-+sample+chapters.pdf
+
+I will implement the REST API to:
+
+1. Post new tweet. New tweet will not go beyond 144 characters.
+2. Get All tweets (username, date/time of post, tweet message, likes count, replies)
+3. Increase the count of likes by one. 
+4. I will keep Re-Tweet and more-options links as non-functional.
+5. I will be able to reply to my own tweet. 

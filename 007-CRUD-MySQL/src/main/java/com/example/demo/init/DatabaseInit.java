@@ -23,6 +23,9 @@ public class DatabaseInit implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		
+		userRepository.deleteAll();
+		
 		User user1 = new User();
 		user1.setActive(1);
 		user1.setUsername("visitor");
