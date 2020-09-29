@@ -11,6 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import com.example.demo.entity.InventoryResponse;
 import com.example.demo.entity.ProductEntity;
 import com.example.demo.repository.ProductRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+
 
 @Repository
 public class ProductDao {
@@ -33,10 +36,18 @@ public class ProductDao {
 		return productRepository.save(pe);
 	}
 
-
+	@HystrixCommand(fallbackMethod = "getProductStockStatusByCode_Failed",
+			commandProperties = {
+				@HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds", value = "4400")
+			})
 	public ProductEntity getProductStockStatusByCode(String productCode) {
 		// TODO Auto-generated method stub
 		//check if code is valid
+		/*
+		 * try { Thread.sleep(3000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+		
 		ProductEntity tempPE = new ProductEntity();
 		tempPE = productRepository.findByProductCode(productCode);
 		//String url = "http://localhost:9992/api/code/" + productCode;
@@ -55,6 +66,11 @@ public class ProductDao {
 			
 		}
 		
+		return productRepository.findByProductCode(productCode);
+	}
+	
+	public ProductEntity getProductStockStatusByCode_Failed(String productCode) {
+		System.out.println("************************    Failed     ***********************");
 		return productRepository.findByProductCode(productCode);
 	}
 
