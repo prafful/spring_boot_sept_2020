@@ -39,7 +39,8 @@ public class ProductDao {
 		//check if code is valid
 		ProductEntity tempPE = new ProductEntity();
 		tempPE = productRepository.findByProductCode(productCode);
-		String url = "http://localhost:9992/api/code/" + productCode;
+		//String url = "http://localhost:9992/api/code/" + productCode;
+		String url = "http://localhost:8080/shop/inventory/api/code/" + productCode;
 		ResponseEntity<InventoryResponse> inventoryResponse = restTemplate.getForEntity(url, InventoryResponse.class);
 		System.out.println("Response from inventory ms: " + inventoryResponse.toString());
 		
